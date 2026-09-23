@@ -1,0 +1,38 @@
+LAB 7 LOGBOOK -NISHANT AVINASH KURKURE  - E26B07F0753
+SETUP: clang version 21.0.0 python3 version 3.9.6
+T1: running hello.py created 0 new files
+T1: ./hello.c failed because permission denied ; python3 hello.c failed because C code is not valid Python (SyntaxError)
+T1: the extra step in the C workflow is compilation and it produces an executable binary
+T1: when I run python3 hello.py the CPU executes python3 ; hello.py is just data
+T1: hello.c is 76 bytes and hello is 33500 bytes. my guess for why: hello includes machine code instructions and binary executable headers
+T2: file says hello is Mach-O 64-bit executable arm64
+T2 prediction: python3 itself is an executable binary
+T2: python3 is an executable binary so when I run python3 hello.py the CPU executes python3 and reads hello.py as data
+T2: my string sits at offset 0x3f30 inside hello
+T2: hello.py contains only Python code text ; the extra bytes in hello are compiled machine code, binary headers, and library references
+T2: Ops saw garbage because a text editor was showing compiled binary machine code as if it were plain text
+T3 prediction: C will win by about 50x
+T3: C took 0.002 s, Python took 0.035 s, ratio 17.5 ; the contractor's 50x claim is exaggerated
+T3: C took 0.002 s, Python took 0.035 s, ratio 17.5 ; the contractor's 50x claim is exaggerated
+T3: for hello the gap was 0.033 s and without the time command I would not have noticed
+T3: on every pass the interpreter had to parse and interpret instructions ; ./sum had that done once at compile time
+T3: interpretation cost matters when running CPU-intensive loops or large-scale computations and does not matter when running simple one-off scripts, I/O-bound tasks, or fast-executing programs
+T3: sum_fast took 0.000 s which is suspicious because the compiler optimized away the loop and pre-calculated the result at compile time
+T4: same model of Mac as mine: send hello binary because it runs on the same hardware architecture and operating system
+T4: the intern's Intel Mac (x86_64): send hello.c because the compiled arm64 binary will not run on an x86_64 architecture
+T4: a Windows laptop with Python installed: send hello.py because Python is cross-platform so the same script runs natively on Windows via the Python interpreter
+T4: the Ubuntu build server (ELF): send hello.c because macOS Mach-O binaries are incompatible with Linux ELF systems, so it must be compiled locally
+T4: to run, hello.py needs the Python interpreter on the target ; hello needs only the target operating system and compatible CPU architecture
+T4: the file that travels better is hello.py and the price of that is lower execution speed and requiring a target interpreter
+T4: the contractor's note said runs anywhere. verdict: misleading because only the Python script is cross-platform (with an interpreter), while the compiled C binary is platform-specific
+T5: at -O0, f has more adds and g has fewer ; this does match dis.dis
+T5: at -O0, f has more adds and g has fewer ; this does match dis.dis
+T5 prediction: with -O2, f will be optimized to produce the same assembly code as g
+T5: at -O2, f has 1 adds. the compiler optimized away the intermediate temporary variables
+T5: the compiler can afford to optimise because its work happens at compile time and is paid once
+T5: the interpreter cannot because its work happens at runtime and would be paid on every execution
+T5: sum_fast ran in ~0 s because the compiler calculated the result at compile time
+T5: building Chrome takes an hour of compiling. developers accept this because compilation is done once, while the optimized binary runs faster for millions of users millions of times
+EXIT 1: JavaScript can be read in a text editor and the browser runs it with no compile step. it is on the interpreted path. the translator is the browser JS engine (e.g. V8), which is itself a compiled program
+EXIT 2: the contractor's note had three claims. compiled: partially true (C is, JS is not) . 50x: true for CPU loops . runs anywhere: false because binaries are platform-dependent
+EXIT 3: one prediction I got wrong today, and what I learned from it: I underestimated -O2 optimizations, learning that compilers calculate constant loops entirely at compile time

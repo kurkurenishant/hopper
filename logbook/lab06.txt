@@ -1,0 +1,29 @@
+LAB 6 LOGBOOK - <NISHANT AVINASH KURKURE> - <E26B07F0753>
+SETUP: my working directory is logbook
+T1 prediction: I think ls / will show about 16 items
+T1: /bin holds command
+T1: /dev holds ???
+T1: /dev holds hardware files
+T1: / means root directory , ~ means home , . means present directory
+T1: the OS groups files by directories
+T2 prediction: ./deploy will not work because permission denid
+T2 prediction: appending after u-w will no because we removed permission
+T2: -rw-r--r-- written in numbers is 644
+T2: ./deploy failed at first because we removed permission
+T2: the new policy needed chmod we needed permission
+-rwxr-x---  1 nishantavinashkurkure  staff  36  8 Sep 21:18 deploy
+T3 prediction: ./nst-info will not work because permission denied
+T3 prediction: adding .py to the name will not change anything
+T3: python3 nst-info worked but ./nst-info failed because path not defined
+T3: renaming the file to .py changed nothing
+T3: file extensions are actually used by us
+T4 prediction: a file called ls in ~/nst/bin will not work because permission was denied
+T4: nst-info failed from /tmp because it is temporary
+T4: the full path worked because it know where to go
+T4: PATH is searched from left to right and stops at :
+T4: my fake ls took over because its directory was placed earlier in the PATH than the real ls
+T4: the PATH change vanished in a new terminal because environment variables changed in a shell are temporary and do not persist across new sessions
+EXIT 1: a file has -rw-r--r--. running ./file does not run and the one command that fixes it is lacks permission to excute 
+EXIT 2: python3 script works but ./script says permission denied. explained to a friend: python3 script explicitly passes the file to the python interpreter to read, whereas ./script tries to execute the file directly which requires execute permissions it currently lacks
+EXIT 3: PATH worked yesterday, gone this morning, nobody touched the file. what happened: it was temporary
+EXIT 4: one prediction I got wrong today, and what I learned from it: EOF
